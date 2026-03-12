@@ -1,0 +1,24 @@
+services:
+  web:
+    build: .
+    container_name: django-todo-app
+    env_file:
+      - ./.env
+    volumes:
+      - sqlite_data:/app/db.sqlite3
+      - static_files:/app/staticfiles
+    depends_on:
+      - caddy
+
+  caddy:
+    image: caddy:alpine
+    container_name: django-todo-caddy
+    ports:
+      - "80:80"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - static_files:/srv/static
+
+volumes:
+  sqlite_data:
+  static_files:
