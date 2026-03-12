@@ -5,7 +5,7 @@ services:
     env_file:
       - ./.env
     volumes:
-      - sqlite_data:/app/db.sqlite3
+      - sqlite_data:/app/data
       - static_files:/app/staticfiles
     depends_on:
       - caddy
